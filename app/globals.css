@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-orbitron: var(--font-orbitron);
+  --font-inter: var(--font-inter);
+
+  --color-neon-cyan: #06b6d4;
+  --color-neon-pink: #ec4899;
+  --color-neon-green: #22c55e;
+  --color-neon-amber: #f59e0b;
+  --color-grid-base: #1e293b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@utility text-glow {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@utility glass-panel {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+@utility perspective-1000 {
+  perspective: 1200px;
+  /* Slightly deeper perspective */
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@utility rotate-x-60 {
+  transform: rotateX(50deg) rotateZ(0deg);
+}
+
+@utility billboard {
+  transform: rotateX(-50deg) scale(1.6);
+}
+
+@utility clip-path-trapezoid {
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+}
+
+/* Base resets or globals */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000000;
+  overflow: hidden;
+  font-family: var(--font-inter);
+  color: #e2e8f0;
+}
+
+/* CRT Scanline Effect - Subtle */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%), radial-gradient(circle, rgba(255, 255, 255, 0.02) 20%, transparent 80%);
+  background-size: 100% 4px, 100vw 100vh;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.2;
 }
